@@ -1,0 +1,338 @@
+{
+  "version": "1.0",
+  "note": "Atomic Red Team test identifiers and titles only - no commands or payloads.",
+  "map": {
+    "T1059.001": [
+      {
+        "test_id": "T1059.001-1",
+        "title": "Mshta/PowerShell download cradle"
+      },
+      {
+        "test_id": "T1059.001-2",
+        "title": "PowerShell -EncodedCommand execution"
+      },
+      {
+        "test_id": "T1059.001-5",
+        "title": "PowerShell invoke known malicious cmdlet name"
+      }
+    ],
+    "T1059.003": [
+      {
+        "test_id": "T1059.003-1",
+        "title": "Create and execute a batch script"
+      },
+      {
+        "test_id": "T1059.003-4",
+        "title": "Simulate a common command-shell recon one-liner"
+      }
+    ],
+    "T1047": [
+      {
+        "test_id": "T1047-1",
+        "title": "WMI reconnaissance of users/processes"
+      },
+      {
+        "test_id": "T1047-4",
+        "title": "WMI process creation locally"
+      }
+    ],
+    "T1053.005": [
+      {
+        "test_id": "T1053.005-1",
+        "title": "Scheduled task via schtasks"
+      },
+      {
+        "test_id": "T1053.005-6",
+        "title": "Scheduled task that re-runs at logon"
+      }
+    ],
+    "T1543.003": [
+      {
+        "test_id": "T1543.003-1",
+        "title": "Create a Windows service (sc create)"
+      },
+      {
+        "test_id": "T1543.003-4",
+        "title": "Modify an existing service binary path"
+      }
+    ],
+    "T1136.001": [
+      {
+        "test_id": "T1136.001-1",
+        "title": "Create a local user account"
+      },
+      {
+        "test_id": "T1136.001-3",
+        "title": "Create a local account and add to a group"
+      }
+    ],
+    "T1098": [
+      {
+        "test_id": "T1098-2",
+        "title": "Add user to a privileged local group"
+      }
+    ],
+    "T1547.001": [
+      {
+        "test_id": "T1547.001-1",
+        "title": "Add a Run key for persistence"
+      },
+      {
+        "test_id": "T1547.001-7",
+        "title": "Drop a shortcut in the Startup folder"
+      }
+    ],
+    "T1548.002": [
+      {
+        "test_id": "T1548.002-1",
+        "title": "Bypass UAC using a known auto-elevate path"
+      }
+    ],
+    "T1070.001": [
+      {
+        "test_id": "T1070.001-1",
+        "title": "Clear the Windows Security event log"
+      },
+      {
+        "test_id": "T1070.001-2",
+        "title": "Clear all event logs via wevtutil"
+      }
+    ],
+    "T1562.001": [
+      {
+        "test_id": "T1562.001-1",
+        "title": "Disable a security product service"
+      },
+      {
+        "test_id": "T1562.001-7",
+        "title": "Add a tampering exclusion"
+      }
+    ],
+    "T1562.002": [
+      {
+        "test_id": "T1562.002-1",
+        "title": "Disable Windows event logging service"
+      }
+    ],
+    "T1218.011": [
+      {
+        "test_id": "T1218.011-1",
+        "title": "Rundll32 executing a DLL export"
+      }
+    ],
+    "T1218.005": [
+      {
+        "test_id": "T1218.005-1",
+        "title": "Mshta executing a local HTA"
+      }
+    ],
+    "T1003.001": [
+      {
+        "test_id": "T1003.001-1",
+        "title": "Dump LSASS via a known tool"
+      },
+      {
+        "test_id": "T1003.001-2",
+        "title": "Create a LSASS minidump with comsvcs.dll"
+      }
+    ],
+    "T1003.002": [
+      {
+        "test_id": "T1003.002-1",
+        "title": "Save SAM/SYSTEM registry hives"
+      }
+    ],
+    "T1003.003": [
+      {
+        "test_id": "T1003.003-1",
+        "title": "Copy NTDS.dit via volume shadow copy"
+      },
+      {
+        "test_id": "T1003.003-4",
+        "title": "ntdsutil IFM database dump"
+      }
+    ],
+    "T1110.003": [
+      {
+        "test_id": "T1110.003-1",
+        "title": "Password spray against local accounts"
+      },
+      {
+        "test_id": "T1110.003-2",
+        "title": "Domain password spray simulation"
+      }
+    ],
+    "T1558.003": [
+      {
+        "test_id": "T1558.003-1",
+        "title": "Request RC4 service tickets (kerberoast)"
+      }
+    ],
+    "T1552.001": [
+      {
+        "test_id": "T1552.001-1",
+        "title": "Search files for plaintext credentials"
+      }
+    ],
+    "T1087.002": [
+      {
+        "test_id": "T1087.002-1",
+        "title": "Enumerate domain accounts with net/dsquery"
+      }
+    ],
+    "T1082": [
+      {
+        "test_id": "T1082-1",
+        "title": "Collect system information"
+      }
+    ],
+    "T1018": [
+      {
+        "test_id": "T1018-1",
+        "title": "Remote system discovery via net view"
+      }
+    ],
+    "T1057": [
+      {
+        "test_id": "T1057-1",
+        "title": "Process discovery via tasklist"
+      }
+    ],
+    "T1016": [
+      {
+        "test_id": "T1016-1",
+        "title": "Network configuration discovery"
+      }
+    ],
+    "T1482": [
+      {
+        "test_id": "T1482-1",
+        "title": "Domain trust discovery via nltest"
+      }
+    ],
+    "T1069.002": [
+      {
+        "test_id": "T1069.002-1",
+        "title": "Enumerate domain groups"
+      }
+    ],
+    "T1021.001": [
+      {
+        "test_id": "T1021.001-1",
+        "title": "RDP session to a remote host"
+      }
+    ],
+    "T1021.002": [
+      {
+        "test_id": "T1021.002-1",
+        "title": "Copy and execute via admin share"
+      },
+      {
+        "test_id": "T1021.002-3",
+        "title": "PsExec-style remote service execution"
+      }
+    ],
+    "T1021.006": [
+      {
+        "test_id": "T1021.006-1",
+        "title": "Execute a command via WinRM"
+      }
+    ],
+    "T1550.002": [
+      {
+        "test_id": "T1550.002-1",
+        "title": "Pass-the-hash simulation with a test tool"
+      }
+    ],
+    "T1560.001": [
+      {
+        "test_id": "T1560.001-1",
+        "title": "Archive data with a command-line utility"
+      }
+    ],
+    "T1071.001": [
+      {
+        "test_id": "T1071.001-1",
+        "title": "Beacon-like HTTP requests to a test server"
+      }
+    ],
+    "T1071.004": [
+      {
+        "test_id": "T1071.004-1",
+        "title": "DNS queries with encoded subdomains"
+      }
+    ],
+    "T1105": [
+      {
+        "test_id": "T1105-1",
+        "title": "Download a file with certutil"
+      },
+      {
+        "test_id": "T1105-6",
+        "title": "Download a file with PowerShell"
+      }
+    ],
+    "T1041": [
+      {
+        "test_id": "T1041-1",
+        "title": "Exfiltrate a file over the C2 HTTP channel"
+      }
+    ],
+    "T1048": [
+      {
+        "test_id": "T1048-1",
+        "title": "Exfiltrate over DNS"
+      },
+      {
+        "test_id": "T1048-2",
+        "title": "Exfiltrate over unencrypted protocol"
+      }
+    ],
+    "T1567.002": [
+      {
+        "test_id": "T1567.002-1",
+        "title": "Upload a file to cloud storage"
+      }
+    ],
+    "T1486": [
+      {
+        "test_id": "T1486-1",
+        "title": "Encrypt files in a test directory (reversible)"
+      }
+    ],
+    "T1490": [
+      {
+        "test_id": "T1490-1",
+        "title": "Delete volume shadow copies with vssadmin"
+      },
+      {
+        "test_id": "T1490-3",
+        "title": "Disable recovery with bcdedit"
+      }
+    ],
+    "T1489": [
+      {
+        "test_id": "T1489-1",
+        "title": "Stop a service with net stop"
+      }
+    ],
+    "T1140": [
+      {
+        "test_id": "T1140-1",
+        "title": "Decode a base64 payload with certutil"
+      }
+    ],
+    "T1036": [
+      {
+        "test_id": "T1036-1",
+        "title": "Rename a tool to masquerade as a system binary"
+      }
+    ],
+    "T1055": [
+      {
+        "test_id": "T1055-1",
+        "title": "Process injection into a benign test process"
+      }
+    ]
+  }
+}

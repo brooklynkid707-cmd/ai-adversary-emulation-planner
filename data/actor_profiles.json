@@ -1,0 +1,202 @@
+{
+  "version": "1.0",
+  "profiles": [
+    {
+      "id": "ransomware-affiliate",
+      "name": "Group A - Ransomware Affiliate (healthcare/finance)",
+      "summary": "Financially motivated affiliate of a ransomware-as-a-service operation. Phishing or exposed remote services for access, hands-on-keyboard escalation, double extortion (exfil then encrypt).",
+      "motivation": "financial",
+      "typical_targets": [
+        "healthcare",
+        "finance",
+        "manufacturing"
+      ],
+      "techniques": [
+        "T1566.001",
+        "T1133",
+        "T1078",
+        "T1059.001",
+        "T1569.002",
+        "T1053.005",
+        "T1543.003",
+        "T1548.002",
+        "T1134",
+        "T1562.001",
+        "T1070.001",
+        "T1003.001",
+        "T1558.003",
+        "T1110.003",
+        "T1087.002",
+        "T1018",
+        "T1482",
+        "T1021.001",
+        "T1021.002",
+        "T1550.002",
+        "T1570",
+        "T1560.001",
+        "T1005",
+        "T1567.002",
+        "T1041",
+        "T1071.001",
+        "T1105",
+        "T1489",
+        "T1490",
+        "T1486"
+      ]
+    },
+    {
+      "id": "state-espionage",
+      "name": "Group B - State-Nexus Espionage",
+      "summary": "Stealthy, long-dwell intrusion set focused on intellectual property and sensitive data. Spearphishing and edge exploitation, living-off-the-land, encrypted C2, slow and careful collection.",
+      "motivation": "espionage",
+      "typical_targets": [
+        "government",
+        "defense",
+        "technology",
+        "ngo"
+      ],
+      "techniques": [
+        "T1566.002",
+        "T1190",
+        "T1133",
+        "T1059.001",
+        "T1047",
+        "T1505.003",
+        "T1574.002",
+        "T1546.003",
+        "T1055",
+        "T1036",
+        "T1027",
+        "T1070.004",
+        "T1003.001",
+        "T1558.003",
+        "T1555",
+        "T1087.002",
+        "T1482",
+        "T1069.002",
+        "T1021.006",
+        "T1550.002",
+        "T1005",
+        "T1039",
+        "T1114",
+        "T1560.001",
+        "T1071.001",
+        "T1573",
+        "T1090",
+        "T1105",
+        "T1041",
+        "T1567.002"
+      ]
+    },
+    {
+      "id": "ecrime-loader",
+      "name": "Group C - eCrime Loader / Access Broker",
+      "summary": "Commodity-malware crew that gains and sells access. Malicious attachments and malvertising, loaders that pull follow-on tooling, credential theft for resale to ransomware affiliates.",
+      "motivation": "financial",
+      "typical_targets": [
+        "any opportunistic"
+      ],
+      "techniques": [
+        "T1566.001",
+        "T1189",
+        "T1204.002",
+        "T1059.005",
+        "T1059.001",
+        "T1218.011",
+        "T1218.005",
+        "T1547.001",
+        "T1053.005",
+        "T1055",
+        "T1027.010",
+        "T1140",
+        "T1003.001",
+        "T1555",
+        "T1552.001",
+        "T1082",
+        "T1057",
+        "T1016",
+        "T1071.001",
+        "T1105",
+        "T1572",
+        "T1041"
+      ]
+    },
+    {
+      "id": "insider-threat",
+      "name": "Group D - Malicious Insider",
+      "summary": "Authorized user abusing legitimate access to collect and exfiltrate data. Little or no malware; detection relies on behaviour, data access and egress anomalies.",
+      "motivation": "data theft",
+      "typical_targets": [
+        "own employer"
+      ],
+      "techniques": [
+        "T1078",
+        "T1087.002",
+        "T1083",
+        "T1005",
+        "T1039",
+        "T1114",
+        "T1552.001",
+        "T1560.001",
+        "T1048",
+        "T1567.002",
+        "T1020"
+      ]
+    },
+    {
+      "id": "hacktivist",
+      "name": "Group E - Hacktivist / Disruption",
+      "summary": "Ideologically motivated actor seeking visible disruption. Public-facing exploitation and valid accounts, defacement and destructive impact over stealth.",
+      "motivation": "ideological",
+      "typical_targets": [
+        "government",
+        "media",
+        "high-profile brands"
+      ],
+      "techniques": [
+        "T1190",
+        "T1078",
+        "T1505.003",
+        "T1059.003",
+        "T1136.001",
+        "T1098",
+        "T1070.001",
+        "T1562.001",
+        "T1046",
+        "T1018",
+        "T1485",
+        "T1489",
+        "T1529"
+      ]
+    },
+    {
+      "id": "scattered-social-eng",
+      "name": "Group F - Social-Engineering Intrusion Set",
+      "summary": "Native-English social engineers who abuse help desks and MFA fatigue for identity-based access, then move fast in cloud and on-prem using legitimate tooling.",
+      "motivation": "financial",
+      "typical_targets": [
+        "telecom",
+        "technology",
+        "business process outsourcing"
+      ],
+      "techniques": [
+        "T1566.002",
+        "T1078",
+        "T1133",
+        "T1098",
+        "T1136.001",
+        "T1059.001",
+        "T1555",
+        "T1552.001",
+        "T1087.002",
+        "T1018",
+        "T1021.001",
+        "T1021.006",
+        "T1005",
+        "T1567.002",
+        "T1071.001",
+        "T1105"
+      ]
+    }
+  ]
+}

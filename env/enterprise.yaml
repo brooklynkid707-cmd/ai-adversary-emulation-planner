@@ -1,0 +1,29 @@
+# Authorized test environment - mid-size enterprise with broad telemetry (synthetic).
+name: "Contoso-style enterprise - broad telemetry lab"
+os_mix:
+  - "Windows Server 2022 domain"
+  - "Windows 11 endpoints"
+  - "Linux build/CI servers"
+  - "Microsoft 365 / Entra ID"
+data_sources:
+  - "Process"
+  - "Command"
+  - "Script"
+  - "Logon Session"
+  - "Windows Registry"
+  - "Service"
+  - "Scheduled Job"
+  - "Module"
+  - "WMI"
+  - "Network Traffic"
+  - "File"
+  - "Network Share"
+  - "Active Directory"
+  - "Application Log"
+siem: "Splunk Enterprise Security"
+edr: "CrowdStrike Falcon"
+blackout_windows:
+  - "Sundays 00:00-06:00 maintenance window (no tests)"
+notes: >
+  Near-full Sysmon coverage and DNS logging; good test bed for lateral movement
+  and C2 detections. Still isolate impact-tactic tests to the lab segment.

@@ -1,0 +1,1304 @@
+{
+  "version": "1.0",
+  "source": "MITRE ATT&CK Enterprise (public)",
+  "tactic_order": [
+    "reconnaissance",
+    "resource-development",
+    "initial-access",
+    "execution",
+    "persistence",
+    "privilege-escalation",
+    "defense-evasion",
+    "credential-access",
+    "discovery",
+    "lateral-movement",
+    "collection",
+    "command-and-control",
+    "exfiltration",
+    "impact"
+  ],
+  "techniques": [
+    {
+      "id": "T1595",
+      "name": "Active Scanning",
+      "tactic": "reconnaissance",
+      "description": "Adversary probes victim infrastructure (ports, vulnerabilities) before access.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Firewall/NetFlow connection logs",
+        "Zeek conn.log"
+      ]
+    },
+    {
+      "id": "T1592",
+      "name": "Gather Victim Host Information",
+      "tactic": "reconnaissance",
+      "description": "Collecting details about victim hosts (OS, hardware) from open sources.",
+      "data_sources": [
+        "Internet Scan"
+      ],
+      "log_events": [
+        "Web server access logs"
+      ]
+    },
+    {
+      "id": "T1589",
+      "name": "Gather Victim Identity Information",
+      "tactic": "reconnaissance",
+      "description": "Harvesting employee names, emails and credentials from public sources.",
+      "data_sources": [
+        "Internet Scan"
+      ],
+      "log_events": [
+        "External OSINT (no internal telemetry)"
+      ]
+    },
+    {
+      "id": "T1598",
+      "name": "Phishing for Information",
+      "tactic": "reconnaissance",
+      "description": "Soliciting information from targets via deceptive messages.",
+      "data_sources": [
+        "Application Log"
+      ],
+      "log_events": [
+        "Email gateway logs",
+        "Message trace"
+      ]
+    },
+    {
+      "id": "T1583",
+      "name": "Acquire Infrastructure",
+      "tactic": "resource-development",
+      "description": "Buying or leasing domains, servers or services used to stage operations.",
+      "data_sources": [
+        "Internet Scan"
+      ],
+      "log_events": [
+        "Passive DNS",
+        "Certificate transparency"
+      ]
+    },
+    {
+      "id": "T1585",
+      "name": "Establish Accounts",
+      "tactic": "resource-development",
+      "description": "Creating social-media or email accounts to support targeting.",
+      "data_sources": [
+        "Persona"
+      ],
+      "log_events": [
+        "(external, no internal telemetry)"
+      ]
+    },
+    {
+      "id": "T1588",
+      "name": "Obtain Capabilities",
+      "tactic": "resource-development",
+      "description": "Acquiring tooling, exploits or certificates rather than developing them.",
+      "data_sources": [
+        "Malware Repository"
+      ],
+      "log_events": [
+        "Threat-intel feeds"
+      ]
+    },
+    {
+      "id": "T1566",
+      "name": "Phishing",
+      "tactic": "initial-access",
+      "description": "Sending deceptive messages to induce execution or credential entry.",
+      "data_sources": [
+        "Application Log",
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Email gateway logs",
+        "Proxy logs"
+      ]
+    },
+    {
+      "id": "T1566.001",
+      "name": "Spearphishing Attachment",
+      "tactic": "initial-access",
+      "description": "Targeted email carrying a malicious attachment to be opened by the user.",
+      "data_sources": [
+        "Application Log",
+        "File"
+      ],
+      "log_events": [
+        "Email gateway logs",
+        "Sysmon 11 (file create)"
+      ]
+    },
+    {
+      "id": "T1566.002",
+      "name": "Spearphishing Link",
+      "tactic": "initial-access",
+      "description": "Targeted email with a link to a credential-harvest or malware page.",
+      "data_sources": [
+        "Application Log",
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Email gateway logs",
+        "Proxy/URL logs"
+      ]
+    },
+    {
+      "id": "T1190",
+      "name": "Exploit Public-Facing Application",
+      "tactic": "initial-access",
+      "description": "Exploiting an internet-exposed application to gain a foothold.",
+      "data_sources": [
+        "Application Log",
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Web/WAF logs",
+        "Sysmon 1 (web app child process)"
+      ]
+    },
+    {
+      "id": "T1133",
+      "name": "External Remote Services",
+      "tactic": "initial-access",
+      "description": "Using exposed remote services (VPN, RDP gateway, Citrix) to enter.",
+      "data_sources": [
+        "Logon Session",
+        "Network Traffic"
+      ],
+      "log_events": [
+        "VPN logs",
+        "Security 4624 (type 10)"
+      ]
+    },
+    {
+      "id": "T1078",
+      "name": "Valid Accounts",
+      "tactic": "initial-access",
+      "description": "Using legitimate credentials to access systems and blend in.",
+      "data_sources": [
+        "Logon Session"
+      ],
+      "log_events": [
+        "Security 4624",
+        "SigninLogs"
+      ]
+    },
+    {
+      "id": "T1078.002",
+      "name": "Valid Accounts: Domain Accounts",
+      "tactic": "initial-access",
+      "description": "Using compromised domain credentials across the environment.",
+      "data_sources": [
+        "Logon Session"
+      ],
+      "log_events": [
+        "Security 4624",
+        "Security 4768/4769 (TGT/TGS)"
+      ]
+    },
+    {
+      "id": "T1199",
+      "name": "Trusted Relationship",
+      "tactic": "initial-access",
+      "description": "Abusing a trusted third-party or MSP connection to reach the target.",
+      "data_sources": [
+        "Logon Session"
+      ],
+      "log_events": [
+        "VPN logs",
+        "Security 4624"
+      ]
+    },
+    {
+      "id": "T1189",
+      "name": "Drive-by Compromise",
+      "tactic": "initial-access",
+      "description": "User's browser is compromised by visiting a malicious or watering-hole site.",
+      "data_sources": [
+        "Network Traffic",
+        "Process"
+      ],
+      "log_events": [
+        "Proxy logs",
+        "Sysmon 1 (browser child)"
+      ]
+    },
+    {
+      "id": "T1059",
+      "name": "Command and Scripting Interpreter",
+      "tactic": "execution",
+      "description": "Abusing command and script interpreters to run adversary code.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1059.001",
+      "name": "PowerShell",
+      "tactic": "execution",
+      "description": "Using PowerShell for execution, often encoded or with download cradles.",
+      "data_sources": [
+        "Process",
+        "Command",
+        "Script"
+      ],
+      "log_events": [
+        "Security 4688",
+        "Sysmon 1",
+        "PowerShell 4104 (script block)"
+      ]
+    },
+    {
+      "id": "T1059.003",
+      "name": "Windows Command Shell",
+      "tactic": "execution",
+      "description": "Using cmd.exe to run commands, chain tools and batch scripts.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1059.005",
+      "name": "Visual Basic",
+      "tactic": "execution",
+      "description": "Executing VBScript/VBA, frequently from Office macros.",
+      "data_sources": [
+        "Process",
+        "Script"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1059.006",
+      "name": "Python",
+      "tactic": "execution",
+      "description": "Using a Python interpreter to execute cross-platform tooling.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688",
+        "auditd execve"
+      ]
+    },
+    {
+      "id": "T1204.002",
+      "name": "User Execution: Malicious File",
+      "tactic": "execution",
+      "description": "User opens a delivered file (document, LNK, ISO) that runs code.",
+      "data_sources": [
+        "Process",
+        "File"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Sysmon 11"
+      ]
+    },
+    {
+      "id": "T1047",
+      "name": "Windows Management Instrumentation",
+      "tactic": "execution",
+      "description": "Using WMI to execute commands locally or on remote hosts.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1 (WmiPrvSE child)",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1569.002",
+      "name": "System Services: Service Execution",
+      "tactic": "execution",
+      "description": "Running a binary by creating/starting a Windows service.",
+      "data_sources": [
+        "Process",
+        "Service"
+      ],
+      "log_events": [
+        "Security 7045",
+        "Security 4697",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1106",
+      "name": "Native API",
+      "tactic": "execution",
+      "description": "Executing via direct OS API calls to avoid spawning command-line tools.",
+      "data_sources": [
+        "Process",
+        "Module"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "ETW"
+      ]
+    },
+    {
+      "id": "T1136.001",
+      "name": "Create Account: Local Account",
+      "tactic": "persistence",
+      "description": "Creating a local account to retain access to a host.",
+      "data_sources": [
+        "User Account"
+      ],
+      "log_events": [
+        "Security 4720"
+      ]
+    },
+    {
+      "id": "T1098",
+      "name": "Account Manipulation",
+      "tactic": "persistence",
+      "description": "Modifying accounts (group membership, credentials) to keep access.",
+      "data_sources": [
+        "User Account",
+        "Group"
+      ],
+      "log_events": [
+        "Security 4728/4732/4756",
+        "Security 4738"
+      ]
+    },
+    {
+      "id": "T1547.001",
+      "name": "Registry Run Keys / Startup Folder",
+      "tactic": "persistence",
+      "description": "Adding a program to Run keys or the Startup folder for autostart.",
+      "data_sources": [
+        "Windows Registry",
+        "File"
+      ],
+      "log_events": [
+        "Sysmon 13 (registry set)",
+        "Sysmon 11 (startup file)"
+      ]
+    },
+    {
+      "id": "T1543.003",
+      "name": "Create or Modify System Process: Windows Service",
+      "tactic": "persistence",
+      "description": "Installing or altering a Windows service for persistence/SYSTEM.",
+      "data_sources": [
+        "Service",
+        "Process"
+      ],
+      "log_events": [
+        "Security 7045",
+        "Security 4697",
+        "Sysmon 13"
+      ]
+    },
+    {
+      "id": "T1053.005",
+      "name": "Scheduled Task",
+      "tactic": "persistence",
+      "description": "Creating a scheduled task that re-launches payloads.",
+      "data_sources": [
+        "Scheduled Job",
+        "Process"
+      ],
+      "log_events": [
+        "Security 4698",
+        "Sysmon 1 (schtasks)"
+      ]
+    },
+    {
+      "id": "T1505.003",
+      "name": "Server Software Component: Web Shell",
+      "tactic": "persistence",
+      "description": "Planting a web shell on a server for remote command execution.",
+      "data_sources": [
+        "File",
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Web server logs",
+        "Sysmon 11",
+        "Sysmon 1 (w3wp child)"
+      ]
+    },
+    {
+      "id": "T1574.002",
+      "name": "Hijack Execution Flow: DLL Side-Loading",
+      "tactic": "persistence",
+      "description": "Placing a malicious DLL next to a signed binary that loads it.",
+      "data_sources": [
+        "Module",
+        "File"
+      ],
+      "log_events": [
+        "Sysmon 7 (image load)",
+        "Sysmon 11"
+      ]
+    },
+    {
+      "id": "T1197",
+      "name": "BITS Jobs",
+      "tactic": "persistence",
+      "description": "Using the BITS service to download and persist payloads stealthily.",
+      "data_sources": [
+        "Process",
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Sysmon 1 (bitsadmin)",
+        "BITS-Client 4104"
+      ]
+    },
+    {
+      "id": "T1546.003",
+      "name": "WMI Event Subscription",
+      "tactic": "persistence",
+      "description": "Registering a permanent WMI event consumer to trigger code.",
+      "data_sources": [
+        "WMI",
+        "Process"
+      ],
+      "log_events": [
+        "Sysmon 19/20/21 (WMI event)"
+      ]
+    },
+    {
+      "id": "T1548.002",
+      "name": "Abuse Elevation Control: Bypass UAC",
+      "tactic": "privilege-escalation",
+      "description": "Bypassing User Account Control to elevate without a prompt.",
+      "data_sources": [
+        "Process",
+        "Windows Registry"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Sysmon 13"
+      ]
+    },
+    {
+      "id": "T1134",
+      "name": "Access Token Manipulation",
+      "tactic": "privilege-escalation",
+      "description": "Manipulating access tokens to run code in another security context.",
+      "data_sources": [
+        "Process"
+      ],
+      "log_events": [
+        "Security 4624 (type 9)",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1068",
+      "name": "Exploitation for Privilege Escalation",
+      "tactic": "privilege-escalation",
+      "description": "Exploiting a software/kernel flaw to gain higher privileges.",
+      "data_sources": [
+        "Process",
+        "Driver"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Sysmon 6 (driver load)"
+      ]
+    },
+    {
+      "id": "T1055",
+      "name": "Process Injection",
+      "tactic": "privilege-escalation",
+      "description": "Injecting code into another process to evade defenses and elevate.",
+      "data_sources": [
+        "Process",
+        "Module"
+      ],
+      "log_events": [
+        "Sysmon 8 (CreateRemoteThread)",
+        "Sysmon 10 (process access)"
+      ]
+    },
+    {
+      "id": "T1484.001",
+      "name": "Domain Policy Modification: Group Policy",
+      "tactic": "privilege-escalation",
+      "description": "Altering Group Policy to push privileged changes domain-wide.",
+      "data_sources": [
+        "Active Directory",
+        "Command"
+      ],
+      "log_events": [
+        "Security 5136 (DS object modified)"
+      ]
+    },
+    {
+      "id": "T1070.001",
+      "name": "Indicator Removal: Clear Windows Event Logs",
+      "tactic": "defense-evasion",
+      "description": "Clearing event logs to remove traces of activity.",
+      "data_sources": [
+        "Windows Registry",
+        "Command"
+      ],
+      "log_events": [
+        "Security 1102",
+        "System 104"
+      ]
+    },
+    {
+      "id": "T1070.004",
+      "name": "Indicator Removal: File Deletion",
+      "tactic": "defense-evasion",
+      "description": "Deleting files dropped during the operation.",
+      "data_sources": [
+        "File",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 23 (file delete)",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1027",
+      "name": "Obfuscated Files or Information",
+      "tactic": "defense-evasion",
+      "description": "Encoding or packing files and commands to hinder analysis.",
+      "data_sources": [
+        "File",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "PowerShell 4104"
+      ]
+    },
+    {
+      "id": "T1027.010",
+      "name": "Command Obfuscation",
+      "tactic": "defense-evasion",
+      "description": "Obscuring command-line content (encoding, concatenation).",
+      "data_sources": [
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688",
+        "PowerShell 4104"
+      ]
+    },
+    {
+      "id": "T1562.001",
+      "name": "Impair Defenses: Disable or Modify Tools",
+      "tactic": "defense-evasion",
+      "description": "Disabling or tampering with security software.",
+      "data_sources": [
+        "Windows Registry",
+        "Service",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688",
+        "Defender 5001",
+        "Sysmon 13"
+      ]
+    },
+    {
+      "id": "T1562.002",
+      "name": "Impair Defenses: Disable Windows Event Logging",
+      "tactic": "defense-evasion",
+      "description": "Turning off or weakening Windows audit logging.",
+      "data_sources": [
+        "Windows Registry",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4719",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1218.011",
+      "name": "System Binary Proxy Execution: Rundll32",
+      "tactic": "defense-evasion",
+      "description": "Using rundll32.exe to proxy execution of code.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1218.005",
+      "name": "System Binary Proxy Execution: Mshta",
+      "tactic": "defense-evasion",
+      "description": "Using mshta.exe to execute HTA/script content.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1036",
+      "name": "Masquerading",
+      "tactic": "defense-evasion",
+      "description": "Naming/placing tools to look legitimate (e.g. svchost in user path).",
+      "data_sources": [
+        "Process",
+        "File"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1112",
+      "name": "Modify Registry",
+      "tactic": "defense-evasion",
+      "description": "Changing registry keys to evade defenses or hide configuration.",
+      "data_sources": [
+        "Windows Registry"
+      ],
+      "log_events": [
+        "Sysmon 13",
+        "Security 4657"
+      ]
+    },
+    {
+      "id": "T1140",
+      "name": "Deobfuscate/Decode Files or Information",
+      "tactic": "defense-evasion",
+      "description": "Decoding staged payloads on the host (certutil, base64).",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1 (certutil)",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1003.001",
+      "name": "OS Credential Dumping: LSASS Memory",
+      "tactic": "credential-access",
+      "description": "Reading LSASS memory to extract credentials.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 10 (lsass access)",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1003.002",
+      "name": "OS Credential Dumping: SAM",
+      "tactic": "credential-access",
+      "description": "Extracting the local SAM database for password hashes.",
+      "data_sources": [
+        "Windows Registry",
+        "File",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1 (reg save)",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1003.003",
+      "name": "OS Credential Dumping: NTDS",
+      "tactic": "credential-access",
+      "description": "Copying NTDS.dit from a domain controller for all domain hashes.",
+      "data_sources": [
+        "File",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1 (ntdsutil/vssadmin)",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1110.003",
+      "name": "Brute Force: Password Spraying",
+      "tactic": "credential-access",
+      "description": "Trying one/few passwords across many accounts to avoid lockout.",
+      "data_sources": [
+        "Logon Session",
+        "User Account"
+      ],
+      "log_events": [
+        "Security 4625",
+        "Security 4771",
+        "SigninLogs"
+      ]
+    },
+    {
+      "id": "T1558.003",
+      "name": "Steal or Forge Kerberos Tickets: Kerberoasting",
+      "tactic": "credential-access",
+      "description": "Requesting service tickets to crack SPN account passwords offline.",
+      "data_sources": [
+        "Logon Session"
+      ],
+      "log_events": [
+        "Security 4769 (RC4/0x17)"
+      ]
+    },
+    {
+      "id": "T1555",
+      "name": "Credentials from Password Stores",
+      "tactic": "credential-access",
+      "description": "Extracting credentials from browsers, vaults and credential managers.",
+      "data_sources": [
+        "Process",
+        "File"
+      ],
+      "log_events": [
+        "Sysmon 10",
+        "Sysmon 11"
+      ]
+    },
+    {
+      "id": "T1552.001",
+      "name": "Unsecured Credentials: Credentials In Files",
+      "tactic": "credential-access",
+      "description": "Searching files/scripts for plaintext credentials.",
+      "data_sources": [
+        "File",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1 (findstr)",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1056.001",
+      "name": "Input Capture: Keylogging",
+      "tactic": "credential-access",
+      "description": "Recording keystrokes to capture credentials and data.",
+      "data_sources": [
+        "Process"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Sysmon 10"
+      ]
+    },
+    {
+      "id": "T1087.002",
+      "name": "Account Discovery: Domain Account",
+      "tactic": "discovery",
+      "description": "Enumerating domain accounts and groups.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688 (net/dsquery)",
+        "Security 4661"
+      ]
+    },
+    {
+      "id": "T1082",
+      "name": "System Information Discovery",
+      "tactic": "discovery",
+      "description": "Collecting host OS, hardware and configuration details.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688 (systeminfo)",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1083",
+      "name": "File and Directory Discovery",
+      "tactic": "discovery",
+      "description": "Enumerating files and directories of interest.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1018",
+      "name": "Remote System Discovery",
+      "tactic": "discovery",
+      "description": "Discovering other hosts on the network.",
+      "data_sources": [
+        "Process",
+        "Command",
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Security 4688 (net view/ping)",
+        "Sysmon 3"
+      ]
+    },
+    {
+      "id": "T1057",
+      "name": "Process Discovery",
+      "tactic": "discovery",
+      "description": "Listing running processes to understand the host.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688 (tasklist)",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1016",
+      "name": "System Network Configuration Discovery",
+      "tactic": "discovery",
+      "description": "Enumerating local network configuration and connections.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688 (ipconfig/netstat)",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1046",
+      "name": "Network Service Discovery",
+      "tactic": "discovery",
+      "description": "Scanning for reachable services on internal hosts.",
+      "data_sources": [
+        "Network Traffic",
+        "Process"
+      ],
+      "log_events": [
+        "Sysmon 3",
+        "Firewall/NetFlow"
+      ]
+    },
+    {
+      "id": "T1482",
+      "name": "Domain Trust Discovery",
+      "tactic": "discovery",
+      "description": "Enumerating domain trust relationships for lateral paths.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688 (nltest)",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1069.002",
+      "name": "Permission Groups Discovery: Domain Groups",
+      "tactic": "discovery",
+      "description": "Enumerating domain groups (e.g. Domain Admins).",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Security 4688 (net group)",
+        "Security 4661"
+      ]
+    },
+    {
+      "id": "T1021.001",
+      "name": "Remote Services: RDP",
+      "tactic": "lateral-movement",
+      "description": "Moving between hosts via Remote Desktop.",
+      "data_sources": [
+        "Logon Session",
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Security 4624 (type 10)",
+        "Security 4778"
+      ]
+    },
+    {
+      "id": "T1021.002",
+      "name": "Remote Services: SMB/Windows Admin Shares",
+      "tactic": "lateral-movement",
+      "description": "Using admin shares (C$, ADMIN$) to move and execute.",
+      "data_sources": [
+        "Logon Session",
+        "Network Share"
+      ],
+      "log_events": [
+        "Security 4624 (type 3)",
+        "Security 5140",
+        "Sysmon 1 (psexec)"
+      ]
+    },
+    {
+      "id": "T1021.006",
+      "name": "Remote Services: Windows Remote Management",
+      "tactic": "lateral-movement",
+      "description": "Using WinRM/PowerShell Remoting to run commands remotely.",
+      "data_sources": [
+        "Logon Session",
+        "Process"
+      ],
+      "log_events": [
+        "Security 4624",
+        "Sysmon 1 (wsmprovhost child)"
+      ]
+    },
+    {
+      "id": "T1570",
+      "name": "Lateral Tool Transfer",
+      "tactic": "lateral-movement",
+      "description": "Copying tools between hosts inside the network.",
+      "data_sources": [
+        "Network Share",
+        "File"
+      ],
+      "log_events": [
+        "Security 5145",
+        "Sysmon 11"
+      ]
+    },
+    {
+      "id": "T1550.002",
+      "name": "Use Alternate Authentication Material: Pass the Hash",
+      "tactic": "lateral-movement",
+      "description": "Authenticating with a stolen NTLM hash instead of a password.",
+      "data_sources": [
+        "Logon Session"
+      ],
+      "log_events": [
+        "Security 4624 (type 3, NTLM)",
+        "Security 4776"
+      ]
+    },
+    {
+      "id": "T1210",
+      "name": "Exploitation of Remote Services",
+      "tactic": "lateral-movement",
+      "description": "Exploiting a vulnerable internal service to move laterally.",
+      "data_sources": [
+        "Network Traffic",
+        "Process"
+      ],
+      "log_events": [
+        "IDS alerts",
+        "Sysmon 1"
+      ]
+    },
+    {
+      "id": "T1005",
+      "name": "Data from Local System",
+      "tactic": "collection",
+      "description": "Collecting files of interest from a compromised host.",
+      "data_sources": [
+        "File",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "Security 4663"
+      ]
+    },
+    {
+      "id": "T1039",
+      "name": "Data from Network Shared Drive",
+      "tactic": "collection",
+      "description": "Collecting data from accessible network shares.",
+      "data_sources": [
+        "Network Share",
+        "File"
+      ],
+      "log_events": [
+        "Security 5140/5145",
+        "Sysmon 11"
+      ]
+    },
+    {
+      "id": "T1560.001",
+      "name": "Archive Collected Data: Archive via Utility",
+      "tactic": "collection",
+      "description": "Compressing/encrypting staged data with an archiver before exfil.",
+      "data_sources": [
+        "Process",
+        "Command",
+        "File"
+      ],
+      "log_events": [
+        "Sysmon 1 (rar/7z/tar)",
+        "Sysmon 11"
+      ]
+    },
+    {
+      "id": "T1114",
+      "name": "Email Collection",
+      "tactic": "collection",
+      "description": "Collecting email content from local or server mailboxes.",
+      "data_sources": [
+        "Application Log",
+        "File"
+      ],
+      "log_events": [
+        "OfficeActivity",
+        "Exchange logs"
+      ]
+    },
+    {
+      "id": "T1113",
+      "name": "Screen Capture",
+      "tactic": "collection",
+      "description": "Capturing screenshots of the victim desktop.",
+      "data_sources": [
+        "Process"
+      ],
+      "log_events": [
+        "Sysmon 1",
+        "ETW"
+      ]
+    },
+    {
+      "id": "T1071.001",
+      "name": "Application Layer Protocol: Web Protocols",
+      "tactic": "command-and-control",
+      "description": "C2 over HTTP/HTTPS blending with normal web traffic.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Proxy logs",
+        "Zeek http.log",
+        "Sysmon 3"
+      ]
+    },
+    {
+      "id": "T1071.004",
+      "name": "Application Layer Protocol: DNS",
+      "tactic": "command-and-control",
+      "description": "C2 or exfil tunnelled over DNS queries.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "DNS logs",
+        "Zeek dns.log"
+      ]
+    },
+    {
+      "id": "T1105",
+      "name": "Ingress Tool Transfer",
+      "tactic": "command-and-control",
+      "description": "Downloading additional tools from external infrastructure.",
+      "data_sources": [
+        "Network Traffic",
+        "File"
+      ],
+      "log_events": [
+        "Proxy logs",
+        "Sysmon 1/3/11"
+      ]
+    },
+    {
+      "id": "T1572",
+      "name": "Protocol Tunneling",
+      "tactic": "command-and-control",
+      "description": "Tunnelling traffic within another protocol to bypass controls.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Firewall/NetFlow",
+        "Zeek conn.log"
+      ]
+    },
+    {
+      "id": "T1090",
+      "name": "Proxy",
+      "tactic": "command-and-control",
+      "description": "Routing C2 through intermediary proxies/relays.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Proxy logs",
+        "Firewall logs"
+      ]
+    },
+    {
+      "id": "T1573",
+      "name": "Encrypted Channel",
+      "tactic": "command-and-control",
+      "description": "Encrypting C2 traffic to hide its content.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "TLS/JA3 logs",
+        "Zeek ssl.log"
+      ]
+    },
+    {
+      "id": "T1041",
+      "name": "Exfiltration Over C2 Channel",
+      "tactic": "exfiltration",
+      "description": "Sending stolen data out over the existing C2 channel.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Proxy logs",
+        "NetFlow byte counts"
+      ]
+    },
+    {
+      "id": "T1048",
+      "name": "Exfiltration Over Alternative Protocol",
+      "tactic": "exfiltration",
+      "description": "Exfiltrating over a protocol different from the C2 channel.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "DNS/FTP/SMTP logs",
+        "NetFlow"
+      ]
+    },
+    {
+      "id": "T1567.002",
+      "name": "Exfiltration to Cloud Storage",
+      "tactic": "exfiltration",
+      "description": "Uploading data to a cloud storage service.",
+      "data_sources": [
+        "Network Traffic"
+      ],
+      "log_events": [
+        "Proxy logs",
+        "CASB logs"
+      ]
+    },
+    {
+      "id": "T1020",
+      "name": "Automated Exfiltration",
+      "tactic": "exfiltration",
+      "description": "Automatically transferring collected data on a schedule.",
+      "data_sources": [
+        "Network Traffic",
+        "Command"
+      ],
+      "log_events": [
+        "NetFlow",
+        "Sysmon 3"
+      ]
+    },
+    {
+      "id": "T1486",
+      "name": "Data Encrypted for Impact",
+      "tactic": "impact",
+      "description": "Encrypting data to disrupt operations and demand ransom.",
+      "data_sources": [
+        "File",
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 11 (mass writes)",
+        "Security 4663"
+      ]
+    },
+    {
+      "id": "T1490",
+      "name": "Inhibit System Recovery",
+      "tactic": "impact",
+      "description": "Deleting shadow copies/backups to prevent recovery.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 1 (vssadmin/wbadmin/bcdedit)",
+        "Security 4688"
+      ]
+    },
+    {
+      "id": "T1489",
+      "name": "Service Stop",
+      "tactic": "impact",
+      "description": "Stopping services (databases, security) before encryption.",
+      "data_sources": [
+        "Service",
+        "Process"
+      ],
+      "log_events": [
+        "Security 7036",
+        "Security 4688 (net stop)"
+      ]
+    },
+    {
+      "id": "T1485",
+      "name": "Data Destruction",
+      "tactic": "impact",
+      "description": "Destroying data/files to disrupt availability.",
+      "data_sources": [
+        "File",
+        "Command"
+      ],
+      "log_events": [
+        "Sysmon 23",
+        "Security 4663"
+      ]
+    },
+    {
+      "id": "T1529",
+      "name": "System Shutdown/Reboot",
+      "tactic": "impact",
+      "description": "Shutting down or rebooting systems to disrupt or complete impact.",
+      "data_sources": [
+        "Process",
+        "Command"
+      ],
+      "log_events": [
+        "System 1074",
+        "Security 4688 (shutdown)"
+      ]
+    }
+  ]
+}

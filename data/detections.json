@@ -1,0 +1,243 @@
+{
+  "version": "1.0",
+  "map": {
+    "T1059.001": [
+      {
+        "type": "sigma",
+        "title": "Encoded PowerShell Command Line",
+        "logic": "process == powershell AND command_line contains '-enc'/'-encodedcommand'",
+        "repo": "splunk-threat-detection-lab"
+      },
+      {
+        "type": "kql",
+        "title": "sec-4688-encoded-powershell",
+        "logic": "SecurityEvent | where NewProcessName endswith 'powershell.exe' and CommandLine matches regex '-e[ncodema]* [A-Za-z0-9+/=]{30,}'",
+        "repo": "microsoft-sentinel-detection-engineering"
+      }
+    ],
+    "T1059.003": [
+      {
+        "type": "splunk",
+        "title": "Suspicious cmd.exe child of Office",
+        "logic": "index=win EventCode=1 ParentImage=*winword.exe Image=*cmd.exe | stats count by host,User",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1566.001": [
+      {
+        "type": "sigma",
+        "title": "Office Application Spawning Script Host",
+        "logic": "parent in (winword,excel,outlook) AND child in (cmd,powershell,wscript,mshta)",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1047": [
+      {
+        "type": "kql",
+        "title": "WmiPrvSE spawning shells",
+        "logic": "Sysmon 1 | where ParentImage endswith 'WmiPrvSE.exe' and Image has_any ('cmd.exe','powershell.exe')",
+        "repo": "microsoft-sentinel-detection-engineering"
+      }
+    ],
+    "T1053.005": [
+      {
+        "type": "kql",
+        "title": "sec-4698-scheduled-task-created",
+        "logic": "SecurityEvent EventID==4698 | parse task XML for Command/Arguments; flag scripting hosts & user-writable paths",
+        "repo": "microsoft-sentinel-detection-engineering"
+      }
+    ],
+    "T1543.003": [
+      {
+        "type": "kql",
+        "title": "sec-7045-new-service-installed",
+        "logic": "union SecurityEvent(4697), Event(System 7045) | where ImagePath suspicious or random 8-16 char name",
+        "repo": "microsoft-sentinel-detection-engineering"
+      }
+    ],
+    "T1136.001": [
+      {
+        "type": "kql",
+        "title": "sec-4720-local-account-created",
+        "logic": "SecurityEvent EventID==4720 where SubjectUserName !endswith '$'",
+        "repo": "microsoft-sentinel-detection-engineering"
+      }
+    ],
+    "T1098": [
+      {
+        "type": "kql",
+        "title": "sec-4728-4732-privileged-group-add",
+        "logic": "SecurityEvent EventID in (4728,4732,4756) and GroupName in tier0 list",
+        "repo": "microsoft-sentinel-detection-engineering"
+      }
+    ],
+    "T1547.001": [
+      {
+        "type": "sigma",
+        "title": "Run Key Persistence Set",
+        "logic": "Sysmon 13 TargetObject contains '\\CurrentVersion\\Run'",
+        "repo": "siem-from-scratch"
+      }
+    ],
+    "T1070.001": [
+      {
+        "type": "kql",
+        "title": "sec-1102-security-log-cleared",
+        "logic": "SecurityEvent EventID==1102 (any)",
+        "repo": "microsoft-sentinel-detection-engineering"
+      },
+      {
+        "type": "splunk",
+        "title": "Windows Event Log Cleared (1102/104)",
+        "logic": "index=win (EventCode=1102 OR EventCode=104) | stats count by host,user",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1562.002": [
+      {
+        "type": "kql",
+        "title": "sec-4719-audit-policy-changed",
+        "logic": "SecurityEvent EventID==4719 removing success/failure auditing by human account",
+        "repo": "microsoft-sentinel-detection-engineering"
+      }
+    ],
+    "T1003.001": [
+      {
+        "type": "kql",
+        "title": "mde-lsass-memory-dump",
+        "logic": "DeviceProcessEvents | procdump/comsvcs MiniDump/known dumpers targeting lsass",
+        "repo": "microsoft-sentinel-detection-engineering"
+      },
+      {
+        "type": "sigma",
+        "title": "LSASS Access by Non-Allowlisted Process",
+        "logic": "Sysmon 10 TargetImage=lsass.exe AND SourceImage NOT in allowlist AND GrantedAccess in (0x1010,0x1410,0x1fffff)",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1003.003": [
+      {
+        "type": "splunk",
+        "title": "NTDS.dit Extraction Indicators",
+        "logic": "EventCode=1 (Image=*ntdsutil.exe OR CommandLine=*ntds* OR CommandLine=*vssadmin*create*)",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1110.003": [
+      {
+        "type": "kql",
+        "title": "signin-password-spray-by-ip / sec-4776-ntlm-password-spray",
+        "logic": "group failures by source; DistinctUsers>=10 AND AttemptsPerAccount<=3 within 1h",
+        "repo": "microsoft-sentinel-detection-engineering"
+      },
+      {
+        "type": "splunk",
+        "title": "Password Spraying - One Source Many Accounts",
+        "logic": "EventCode=4625 | stats dc(Account_Name) as users by src | where users>=10",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1558.003": [
+      {
+        "type": "sigma",
+        "title": "Kerberoasting - RC4 Service Ticket Requests",
+        "logic": "Security 4769 TicketEncryptionType=0x17 AND ServiceName != krbtgt | stats by Account",
+        "repo": "siem-from-scratch"
+      }
+    ],
+    "T1021.001": [
+      {
+        "type": "kql",
+        "title": "tdl-005 RDP to multiple hosts by one user",
+        "logic": "Security 4624 LogonType==10 | summarize dc(Computer) by Account within 1h >= N",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1021.002": [
+      {
+        "type": "splunk",
+        "title": "SMB Admin Share Fan-Out",
+        "logic": "EventCode=5140 ShareName in (ADMIN$,C$) | stats dc(dest) by src_user",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1550.002": [
+      {
+        "type": "sigma",
+        "title": "Pass-the-Hash NTLM Logon",
+        "logic": "Security 4624 LogonType=3 AuthenticationPackage=NTLM AND KeyLength=0 (and 4776)",
+        "repo": "siem-from-scratch"
+      }
+    ],
+    "T1071.001": [
+      {
+        "type": "kql",
+        "title": "csl-firewall-beaconing",
+        "logic": "CommonSecurityLog | inter-arrival via prev(); >=20 conns, jitter<10%, period 30s-1h",
+        "repo": "microsoft-sentinel-detection-engineering"
+      },
+      {
+        "type": "splunk",
+        "title": "tdl-011 Beaconing Regular Interval",
+        "logic": "compute delta between outbound conns per src,dst,port; low stdev/mean",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1071.004": [
+      {
+        "type": "splunk",
+        "title": "tdl-009/010 DNS Tunneling",
+        "logic": "dns | eval len=len(query) | stats avg(len) dc(subdomain) by domain | where long names / many subdomains",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1105": [
+      {
+        "type": "sigma",
+        "title": "Certutil/BITS/PowerShell Download Cradle",
+        "logic": "process in (certutil,bitsadmin,powershell) AND command_line contains url / '-urlcache' / 'DownloadString'",
+        "repo": "siem-from-scratch"
+      }
+    ],
+    "T1486": [
+      {
+        "type": "sigma",
+        "title": "Mass File Modification (Ransomware)",
+        "logic": "Sysmon 11 | high rate of writes/renames with uncommon extension by one process",
+        "repo": "siem-from-scratch"
+      }
+    ],
+    "T1490": [
+      {
+        "type": "splunk",
+        "title": "Shadow Copy / Backup Deletion",
+        "logic": "EventCode=1 (Image=*vssadmin* delete shadows OR *wbadmin* delete OR *bcdedit* recoveryenabled no)",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1489": [
+      {
+        "type": "sigma",
+        "title": "Service Stop Before Impact",
+        "logic": "process=net.exe/sc.exe 'stop' targeting DB/security/backup services",
+        "repo": "siem-from-scratch"
+      }
+    ],
+    "T1190": [
+      {
+        "type": "sigma",
+        "title": "Web Server Spawning Shell",
+        "logic": "parent in (w3wp,httpd,tomcat) AND child in (cmd,powershell,bash,whoami)",
+        "repo": "splunk-threat-detection-lab"
+      }
+    ],
+    "T1078": [
+      {
+        "type": "kql",
+        "title": "signin-high-risk-successful / impossible-travel",
+        "logic": "SigninLogs RiskLevelDuringSignIn=high ResultType=0; or geo-velocity > threshold",
+        "repo": "microsoft-sentinel-detection-engineering"
+      }
+    ]
+  }
+}

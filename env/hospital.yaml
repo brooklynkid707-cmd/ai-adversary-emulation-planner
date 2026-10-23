@@ -1,0 +1,28 @@
+# Authorized test environment - regional hospital (synthetic).
+# Describes what telemetry is actually collected so the planner can flag
+# detection blind spots. No real systems or data.
+name: "Regional Hospital - clinical and corporate IT (lab)"
+os_mix:
+  - "Windows Server 2022 (AD, file, Exchange on-prem)"
+  - "Windows 11 clinical workstations"
+  - "Windows 10 corporate laptops"
+  - "Linux (RHEL) application servers"
+data_sources:
+  - "Process"          # Sysmon 1 / Security 4688 on servers + workstations
+  - "Command"
+  - "Logon Session"    # Security 4624/4625/4768/4769
+  - "Windows Registry" # Sysmon 13 (servers only)
+  - "Service"
+  - "Scheduled Job"
+  - "Network Traffic"  # firewall + proxy, no full PCAP
+  - "File"             # Sysmon 11 on servers
+  # NOT collected: Module (Sysmon 7), WMI (Sysmon 19-21), DNS query logs
+siem: "Microsoft Sentinel"
+edr: "Microsoft Defender for Endpoint (servers + 60% of workstations)"
+blackout_windows:
+  - "Weekdays 06:00-20:00 (clinical hours) - no destructive or DoS-adjacent tests"
+  - "Month-end billing run (last 2 business days)"
+notes: >
+  Clinical safety first: impact-tactic techniques run only against the isolated
+  lab replica, never against clinical VLANs. DNS tunneling and module-load
+  detections are blind spots (logs not collected) and are expected gaps.

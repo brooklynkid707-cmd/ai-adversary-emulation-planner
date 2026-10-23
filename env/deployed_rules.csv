@@ -1,0 +1,23 @@
+rule_name,technique_id,siem,status
+sec-4625-brute-force,T1110.003,Microsoft Sentinel,enabled
+sec-4720-local-account-created,T1136.001,Microsoft Sentinel,enabled
+sec-4728-4732-privileged-group-add,T1098,Microsoft Sentinel,enabled
+sec-1102-security-log-cleared,T1070.001,Microsoft Sentinel,enabled
+sec-4688-encoded-powershell,T1059.001;T1027,Microsoft Sentinel,enabled
+sec-4698-scheduled-task-created,T1053.005,Microsoft Sentinel,enabled
+sec-7045-new-service-installed,T1543.003,Microsoft Sentinel,enabled
+sec-4648-explicit-credentials-lateral,T1021;T1078.002,Microsoft Sentinel,enabled
+sec-4776-ntlm-password-spray,T1110.003,Microsoft Sentinel,enabled
+sec-4719-audit-policy-changed,T1562.002,Microsoft Sentinel,enabled
+mde-lsass-memory-dump,T1003.001,Microsoft Sentinel,enabled
+mde-lolbin-proxy-execution,T1218,Microsoft Sentinel,enabled
+csl-firewall-beaconing,T1071.001;T1573,Microsoft Sentinel,enabled
+signin-high-risk-successful,T1078,Microsoft Sentinel,enabled
+kerberoasting-rc4-tgs,T1558.003,Splunk,enabled
+smb-admin-share-fanout,T1021.002,Splunk,enabled
+shadow-copy-deletion,T1490,Splunk,enabled
+service-stop-before-impact,T1489,Splunk,draft
+rdp-to-multiple-hosts,T1021.001,Splunk,enabled
+domain-recon-net-commands,T1087.002,Splunk,enabled
+mass-file-encryption,T1486,Splunk,enabled
+web-shell-w3wp-child,T1505.003,Splunk,disabled
